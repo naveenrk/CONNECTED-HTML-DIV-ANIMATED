@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body translate="no">
+
+    <div id="content">
+    <div id="div1" class="mydiv">
+      <img class="img1" alt="" src="/images/battery.png">
+      <div class="unit1">100 kw</div>
+    </div>
+    <div id="div2" class="mydiv">
+        <img class="img2" alt="" src="/images/board.png">
+    </div>
+    <div id="line" style="transform: rotate(60.0617deg); top: 115.589px; left: 696px; height: 440.822px;"></div>
+  
+    <div id="div3" class="mydiv">
+      <img class="img3" alt="" src="/images/pv.png">
+      <div class="unit3">492 kw</div>
+    </div>
+    <div id="div4" class="mydiv">
+      <img class="img4" alt="" src="/images/Grid.png">
+      <div class="unit4">26 kw</div>
+    </div>
+    <div id="line1" style="transform: rotate(0deg); top: 36px; left: 887px; height: 190px;"></div>
+    
+    <div id="line2" style="transform: rotate(90deg); top: -128px; left: 533px; height: 708px;"></div>
+    <div id="div5" class="mydiv">
+      <img class="img5" alt="" src="/images/Load.png">
+      <div class="unit5">618 kw</div>
+    </div>
+    
+    <div id="line3" style="transform: rotate(90deg); top: -198px; left: 1311px; height: 848px;"></div>
+    <div id="div6" class="mydiv">
+      <img class="img6" alt="" src="/images/Thermal.png">
+      <div class="unit6">0 kw</div>
+    </div>
+    <div id="line4" style="transform: rotate(-67.1859deg); top: 52.3061px; left: 1148.5px; height: 567.388px;"></div>
+  </div>
+      <script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-41c52890748cd7143004e05d3c5f786c66b19939c4500ce446314d1748483e13.js"></script>
+  
+    
+    
+  
+      <script>
+        function adjustLine(from, to, line) {
+  
+    var fT = from.offsetTop + from.offsetHeight / 2;
+    var tT = to.offsetTop + to.offsetHeight / 2;
+    var fL = from.offsetLeft + from.offsetWidth / 2;
+    var tL = to.offsetLeft + to.offsetWidth / 2;
+  
+    var CA = Math.abs(tT - fT);
+    var CO = Math.abs(tL - fL);
+    var H = Math.sqrt(CA * CA + CO * CO);
+    var ANG = 180 / Math.PI * Math.acos(CA / H);
+  
+    if (tT > fT) {
+      var top = (tT - fT) / 2 + fT;
+    } else {
+      var top = (fT - tT) / 2 + tT;
+    }
+    if (tL > fL) {
+      var left = (tL - fL) / 2 + fL;
+    } else {
+      var left = (fL - tL) / 2 + tL;
+    }
+  
+    if (fT < tT && fL < tL || tT < fT && tL < fL || fT > tT && fL > tL || tT > fT && tL > fL) {
+      ANG *= -1;
+    }
+    top -= H / 2;
+  
+    line.style["-webkit-transform"] = 'rotate(' + ANG + 'deg)';
+    line.style["-moz-transform"] = 'rotate(' + ANG + 'deg)';
+    line.style["-ms-transform"] = 'rotate(' + ANG + 'deg)';
+    line.style["-o-transform"] = 'rotate(' + ANG + 'deg)';
+    line.style["-transform"] = 'rotate(' + ANG + 'deg)';
+    line.style.top = top + 'px';
+    line.style.left = left + 'px';
+    line.style.height = H + 'px';
+  }
+  
+  adjustLine(
+  document.getElementById('div1'),
+  document.getElementById('div2'),
+  document.getElementById('line'));
+  
+  adjustLine(
+  document.getElementById('div2'),
+  document.getElementById('div3'),
+  document.getElementById('line1'));
+  
+  adjustLine(
+  document.getElementById('div4'),
+  document.getElementById('div2'),
+  document.getElementById('line2'));
+  
+  adjustLine(
+  document.getElementById('div5'),
+  document.getElementById('div2'),
+  document.getElementById('line3'));
+  
+  adjustLine(
+  document.getElementById('div6'),
+  document.getElementById('div2'),
+  document.getElementById('line4'));
+        //# sourceURL=pen.js
+      </script>
+   </body>
+</html>
